@@ -4,7 +4,7 @@ import math
 import numpy as np
 import os
 
-scale = 1
+scale = 100
 
 def cordtoint(cord):
     i = cord.index('/')
@@ -76,8 +76,17 @@ def latlontocart(cord):
     return [x,y,z]#
 
 def localize(cord):
-    x_o = 852.2245421338656 * scale
-    y_o = -4525.177344212292 * scale
+    b = df_nodes
+    t = 0
+    loc = b.at[0,'location']
+    if(str(type(loc)) != "<class 'list'>"):
+        t = t+1
+        loc = b.at[t,'location']
+
+    norm = latlontocart(loc)
+    
+    x_o = norm[0]#852.2245421338656 * scale
+    y_o = norm[1]#-4525.177344212292 * scale
     z_o = 4402.967673423517 * 1
     xn = cord[0] - x_o
     yn = cord[1] - y_o

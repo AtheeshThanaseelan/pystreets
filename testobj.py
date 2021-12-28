@@ -25,10 +25,16 @@ rl.set_camera_mode(camera, rl.CAMERA_FREE)
 rl.set_camera_alt_control(rl.KEY_A)
 rl.set_target_fps(60)   
 
-mesh2 = rl.gen_mesh_plane(2.0,2.0,1,1)
-mesh = rl.load_mesh("new.obj")
-model = rl.load_model_from_mesh(mesh)
+#mesh2 = rl.gen_mesh_plane(2.0,2.0,1,1)
+#mesh = rl.load_mesh("auto.obj")
+#model = rl.load_model_from_mesh(mesh)
 
+models = []
+
+for x in os.listdir("./objs"):
+    mesh = rl.load_mesh("./objs/"+x)
+    model = rl.load_model_from_mesh(mesh)
+    models.append(model)
 
 while(True):
     rl.update_camera(byref(camera))
@@ -36,8 +42,9 @@ while(True):
     rl.clear_background(rl.RAYWHITE)
     rl.begin_mode3d(camera)
 
-
-    rl.draw_model(model,rl.Vector3(0,0,0),1,rl.RED)
+    for x in models:
+        rl.draw_model(x,rl.Vector3(0,0,0),1,rl.RED)
+        rl.draw_model_wires(x,rl.Vector3(0,0,0),1,rl.BLUE)
 
     rl.draw_grid(10, 1.0)
     rl.end_mode3d()

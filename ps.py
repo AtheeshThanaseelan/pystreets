@@ -20,26 +20,27 @@ gfx.setup_gfx()
 
 linecount = 0
 #for way in osm.df_osm[osm.df_osm.tagkey == "building"].id:
-for way in osm.df_ways.id:
-    p = 0
-    prev = 0
-    linecount = linecount + 1
-    if(linecount > 100):
-        0
-    else:
-        for x in osm.getlocs(osm.df_ways,osm.df_nodes,way):
-            p = (osm.localize(osm.latlontocart(x)))
-            if (prev == 0):
-                1
-            else:
-                l = gfx.line()
-                l.x1 = prev[0]
-                l.z1 = prev[1]
-                l.x2 = p[0]
-                l.z2 = p[1]
-                gfx.gfx_lines.append(l)
-            prev = p
-
+# for way in osm.df_ways.id:
+#     p = 0
+#     prev = 0
+#     linecount = linecount + 1
+#     if(linecount > 100):
+#         0
+#     else:
+#         for x in osm.getlocs(osm.df_ways,osm.df_nodes,way):
+#             p = (osm.localize(osm.latlontocart(x)))
+#             if (prev == 0):
+#                 1
+#             else:
+#                 l = gfx.line()
+#                 l.x1 = prev[0]
+#                 l.z1 = prev[1]
+#                 l.x2 = p[0]
+#                 l.z2 = p[1]
+#                 gfx.gfx_lines.append(l)
+#             prev = p
+p = 0
+prev = 0
 for x in osm.getlocs(osm.df_ways,osm.df_nodes,31363751):
     p = (osm.localize(osm.latlontocart(x)))
     if (prev == 0):
