@@ -1,3 +1,16 @@
+#pickled files
+*.pkl
+
+#3d objects
+*.obj
+
+#osm file
+*.osm
+
+#libraries
+raylib/
+*.so.*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
