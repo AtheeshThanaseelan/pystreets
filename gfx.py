@@ -70,13 +70,7 @@ def loop():
         for x in gfx_lines:
             #print(x.x1)
             rl.draw_line3_d(rl.Vector3(x.x1,x.y1,x.z1),rl.Vector3(x.x2,x.y2,x.z2),x.lcolor)
-        
 
-        mesh2 = rl.gen_mesh_plane(2.0,2.0,1,1)
-        
-        mesh = rl.load_mesh("m.obj")
-        model = rl.load_model_from_mesh(mesh)
-        rl.draw_model(model,rl.Vector3(0,1,0),1,rl.RED)
 
         for x in gfx_cubes:
             rl.draw_cube(x.pos,x.xsize,x.ysize,x.zsize,x.bcolor)

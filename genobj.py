@@ -45,7 +45,7 @@ def make_building_obj(b_id):
         faces.append(p2)
 
 
-    fname = "./objs/"+ str(b_id) + ".obj"
+    fname = "./objs/buildings/"+ str(b_id) + ".obj"
     objFile = open(fname, 'w')
     for vert in verts:
         objFile.write("v ")

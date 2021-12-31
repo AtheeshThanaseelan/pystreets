@@ -31,8 +31,8 @@ rl.set_target_fps(60)
 
 models = []
 
-for x in os.listdir("./objs"):
-    mesh = rl.load_mesh("./objs/"+x)
+for x in os.listdir("./objs/buildings/"):
+    mesh = rl.load_mesh("./objs/buildings/"+x)
     model = rl.load_model_from_mesh(mesh)
     models.append(model)
 

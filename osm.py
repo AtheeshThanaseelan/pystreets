@@ -93,6 +93,11 @@ def localize(cord):
     zn = cord[2] - z_o
     return [xn,yn,zn]
 
+def nodetocords(nodeid):
+    node = df_nodes[df_nodes.id == nodeid]
+    cord = node.location.item() 
+    return cord
+
 df_osm = 0
 df_nodes = 0
 df_ways = 0
