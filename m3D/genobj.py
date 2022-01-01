@@ -8,7 +8,7 @@
 #Get building number and street
 
 
-import osm
+import base.osm as osm
 
 def make_building_obj(b_id):
     h = 1
@@ -45,7 +45,7 @@ def make_building_obj(b_id):
         faces.append(p2)
 
 
-    fname = "./objs/buildings/"+ str(b_id) + ".obj"
+    fname = osm.base+"objs/buildings/"+ str(b_id) + ".obj"
     objFile = open(fname, 'w')
     for vert in verts:
         objFile.write("v ")
@@ -74,7 +74,7 @@ for wayid in osm.df_ways.id:
         make_building_obj(wayid)
     
 
-import testobj
+import rep3D.testbuildingobjs
 
 #print(size)
 #print(verts[13])

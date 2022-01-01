@@ -7,8 +7,8 @@
 #buildings to OBJ
     
 #Roads
-import gfx
-import osm
+import base.gfx
+import base.osm
 
 def add_way_line(way):
     p = 0

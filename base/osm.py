@@ -69,7 +69,7 @@ def latlontocart(cord):
     #z = 6371* 10 * math.sin(cord[0])
     lat, lon = np.deg2rad(cord[0]), np.deg2rad(cord[1])
     R = 6371 # radius of the earth
-    x = R * np.cos(lat) * np.cos(lon) * scale
+    x = R * np.cos(lat) * np.cos(lon) * scale * -1
     y = R * np.cos(lat) * np.sin(lon) * scale
     z = R *np.sin(lat)
     #print(x,y,z)
@@ -101,15 +101,15 @@ def nodetocords(nodeid):
 df_osm = 0
 df_nodes = 0
 df_ways = 0
-
-if(os.path.isfile("tags.pkl") & os.path.isfile("nodes.pkl") & os.path.isfile("ways.pkl")):
-    df_osm = pd.read_pickle("tags.pkl")
-    df_nodes = pd.read_pickle("nodes.pkl")
-    df_ways = pd.read_pickle("ways.pkl")
+base = "working/"
+if(os.path.isfile(base+"tags.pkl") & os.path.isfile(base+"nodes.pkl") & os.path.isfile(base+"ways.pkl")):
+    df_osm = pd.read_pickle(base+"tags.pkl")
+    df_nodes = pd.read_pickle(base+"nodes.pkl")
+    df_ways = pd.read_pickle(base+"ways.pkl")
 else:
     osmhandler = OSMHandler()
     # scan the input file and fills the handler list accordingly
-    osmhandler.apply_file("map.osm")
+    osmhandler.apply_file(base+"map.osm")
 
     # transform the list into a pandas DataFrame
     data_colnames = ['type', 'id', 'version', 'visible', 'ts', 'uid',
@@ -122,9 +122,9 @@ else:
     data_colnames = ['id','nodes']
     df_ways = pd.DataFrame(osmhandler.way_ns,columns=data_colnames)
 
-    df_osm.to_pickle("tags.pkl")
-    df_nodes.to_pickle("nodes.pkl")
-    df_ways.to_pickle("ways.pkl")
+    df_osm.to_pickle(base+"tags.pkl")
+    df_nodes.to_pickle(base+"nodes.pkl")
+    df_ways.to_pickle(base+"ways.pkl")
 
 if __name__ == "__main__":
 

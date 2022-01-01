@@ -1,7 +1,7 @@
 import os
 
 # set the path before raylib is imported.
-os.environ["RAYLIB_BIN_PATH"] = "__main__"
+os.environ["RAYLIB_BIN_PATH"] = "working/"#"__main__"
 
 import raylibpy as rl
 from ctypes import byref
@@ -37,7 +37,7 @@ class line():
         self.x2 = 0
         self.y2 = 0
         self.z2 = 0
-        self.lcolor = rl.RED
+        self.lcolor = rl.BLACK
 
 def setup_gfx():
     # Initialization

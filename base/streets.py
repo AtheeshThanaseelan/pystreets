@@ -1,6 +1,6 @@
-import osm
+import base.osm as osm
 import os
-import ps
+#import ps
 
 #Got road name
 #Got road nodes
@@ -48,15 +48,15 @@ getroads()
 
 
 
-nodes = (roadnames["Grenoble Drive"])
+#nodes = (roadnames["Grenoble Drive"])
 #print(roads.keys())
 #nodes = roads.get(345297296)
-rpoints = []
-for x in nodes:
-    a = osm.nodetocords(x)
-    b = osm.latlontocart(a)
-    c = osm.localize(b)
-    rpoints.append(c)
+# rpoints = []
+# for x in nodes:
+#     a = osm.nodetocords(x)
+#     b = osm.latlontocart(a)
+#     c = osm.localize(b)
+#     rpoints.append(c)
 
 if __name__ == "__main__":
     for x in roads:
