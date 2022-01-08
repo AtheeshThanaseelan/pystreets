@@ -9,13 +9,7 @@ import ctypes
 MAX_COLUMNS = 20
 
 # Define the camera to look into our 3d world
-camera = rl.Camera(
-    rl.Vector3(4.0, 2.0, 4.0),
-    rl.Vector3(0.0, 0.0, 0.0),
-    rl.Vector3(0.0, 1.0, 0.0),
-    45.0,
-    rl.CAMERA_PERSPECTIVE
-)
+camera = 0
 
 gfx_cubes = []
 gfx_lines = []
@@ -40,13 +34,34 @@ class line():
         self.lcolor = rl.BLACK
 
 def setup_gfx():
-    # Initialization
+    # Initialize variables
     # ---------------------------------------------------------------
+    global camera
     screen_width = 800
     screen_height = 600
+    if(os.path.isfile("working/save.sav")):
+        f = open("working/save.sav","rt")
+        cam = f.read()
+        camlist = cam.split("\n")
+        #print(camlist)
+        camera = rl.Camera(
+            rl.Vector3(float(camlist[0]),float(camlist[1]),float(camlist[2])),
+            rl.Vector3(float(camlist[3]),float(camlist[4]),float(camlist[5])),
+            rl.Vector3(float(camlist[6]),float(camlist[7]),float(camlist[8])),
+            45.0,
+            rl.CAMERA_PERSPECTIVE
+        )
+    else:
+        #print("NO")
+        camera = rl.Camera(
+            rl.Vector3(4.0, 2.0, 4.0),
+            rl.Vector3(0.0, 0.0, 0.0),
+            rl.Vector3(0.0, 1.0, 0.0),
+            45.0,
+            rl.CAMERA_PERSPECTIVE
+        )
 
     rl.init_window(screen_width, screen_height, "raylib")
-
     rl.set_camera_mode(camera, rl.CAMERA_FREE)
     rl.set_camera_alt_control(rl.KEY_A)
     rl.set_target_fps(60)    
@@ -93,15 +108,25 @@ def loop():
         rl.end_drawing()
 
 def quit_gfx():
+    #Save info
+    caminfo = []
+    caminfo.append(str(camera.position[0]))
+    caminfo.append(str(camera.position[1]))
+    caminfo.append(str(camera.position[2]))
+    caminfo.append(str(camera.target[0]))
+    caminfo.append(str(camera.target[1]))
+    caminfo.append(str(camera.target[2]))
+    caminfo.append(str(camera.up[0]))
+    caminfo.append(str(camera.up[1]))
+    caminfo.append(str(camera.up[2]))
+    caminfo.append(str(camera.fovy))
+    caminfo.append(str(camera.type))
+        
+    objFile = open("working/save.sav", 'w')
+    for x in caminfo:
+        objFile.write(x+"\n")
+    objFile.close() 
     # De-Initialization
     # ---------------------------------------------------------------
     rl.close_window()       # Close window and OpenGL context
     # ---------------------------------------------------------------
-
-
-#setup_gfx()
-
-#while(True):
-    loop()
-
-#quit_gfx()

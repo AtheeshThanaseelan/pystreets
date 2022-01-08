@@ -18,6 +18,7 @@ class OSMHandler(osm.SimpleHandler):
         self.osm_data = []
         self.node_loc = []
         self.way_ns = []
+        self.rels = []
 
     def tag_inventory(self, elem, elem_type):
         for tag in elem.tags:
@@ -52,6 +53,9 @@ class OSMHandler(osm.SimpleHandler):
         self.way_ns.append(way)
 
     def relation(self, r):
+        #rel = []
+        #print(dir(r))
+        #print(r)
         self.tag_inventory(r, "relation")
 
 def getlocs(dway,dnode,id):
@@ -90,8 +94,11 @@ def localize(cord):
     z_o = 4402.967673423517 * 1
     xn = cord[0] - x_o
     yn = cord[1] - y_o
-    zn = cord[2] - z_o
+    zn = 0#cord[2] - z_o
     return [xn,yn,zn]
+
+def getpont(cord):
+    return localize(latlontocart(cord))
 
 def nodetocords(nodeid):
     node = df_nodes[df_nodes.id == nodeid]
@@ -102,7 +109,7 @@ df_osm = 0
 df_nodes = 0
 df_ways = 0
 base = "working/"
-if(os.path.isfile(base+"tags.pkl") & os.path.isfile(base+"nodes.pkl") & os.path.isfile(base+"ways.pkl")):
+if((1==1)&(os.path.isfile(base+"tags.pkl") & os.path.isfile(base+"nodes.pkl") & os.path.isfile(base+"ways.pkl"))):
     df_osm = pd.read_pickle(base+"tags.pkl")
     df_nodes = pd.read_pickle(base+"nodes.pkl")
     df_ways = pd.read_pickle(base+"ways.pkl")

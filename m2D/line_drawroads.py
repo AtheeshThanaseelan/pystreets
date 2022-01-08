@@ -13,7 +13,7 @@ def draw_road(b_id):
     for x in osm.getlocs(osm.df_ways,osm.df_nodes,b_id):
         p = (osm.localize(osm.latlontocart(x)))
         cord = [p[0],0,p[1]]
-        print(cord)
+        #print(cord)
         verts.append(cord)
 
     prev_p = 0
