@@ -2,8 +2,7 @@ import base.osm as osm
 import base.gfx as gfx
 import base.properties as sts
 
-wayids = sts.roads
-ways = osm.df_ways
+ 
 
 intersection_ways = {}
 intersection_nodes = {}
