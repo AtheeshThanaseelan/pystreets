@@ -1,6 +1,6 @@
-import streets
-import osm
-import gfx
+import base.properties as streets
+import base.osm as osm
+import base.gfx as gfx
 import math
 
 vlist = []
@@ -11,7 +11,7 @@ def make_street_obj(b_id):
     rl_signed = 0
     verts = []
     faces = []
-    for x in osm.getlocs(osm.df_ways,osm.df_nodes,b_id):
+    for x in osm.get_way_locs(b_id):
         p = (osm.localize(osm.latlontocart(x)))
         cord = [p[0],0,p[1]]
         #print(cord)
@@ -51,7 +51,7 @@ def make_street_obj(b_id):
         #p2 = [x+1,x+1+size,x+size]
         #faces.append(p2)
     vlist.append(verts)
-    fname = "./objs/streets/"+ str(b_id) + ".obj"
+    fname = "working/objs/streets/"+ str(b_id) + ".obj"
     objFile = open(fname, 'w')
     for vert in verts:
         objFile.write("v ")

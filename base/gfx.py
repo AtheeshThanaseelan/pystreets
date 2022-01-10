@@ -1,7 +1,7 @@
 import os
 
 # set the path before raylib is imported.
-os.environ["RAYLIB_BIN_PATH"] = "working/"#"__main__"
+os.environ["RAYLIB_BIN_PATH"] = "working/"
 
 import raylibpy as rl
 from ctypes import byref
@@ -13,6 +13,7 @@ camera = 0
 
 gfx_cubes = []
 gfx_lines = []
+models = []
 
 class cube():
     def __init__(self):
@@ -32,6 +33,19 @@ class line():
         self.y2 = 0
         self.z2 = 0
         self.lcolor = rl.BLACK
+
+def load_buildings():
+    base = "working/"
+    for x in os.listdir(base+"objs/buildings/"):
+        mesh = rl.load_mesh(base+"objs/buildings/"+x)
+        model = rl.load_model_from_mesh(mesh)
+        models.append(model)
+
+def load_streets():
+    for x in os.listdir("working/objs/streets/"):
+        mesh = rl.load_mesh("working/objs/streets/"+x)
+        model = rl.load_model_from_mesh(mesh)
+        models.append(model)
 
 def setup_gfx():
     # Initialize variables
@@ -86,10 +100,13 @@ def loop():
             #print(x.x1)
             rl.draw_line3_d(rl.Vector3(x.x1,x.y1,x.z1),rl.Vector3(x.x2,x.y2,x.z2),x.lcolor)
 
-
         for x in gfx_cubes:
             rl.draw_cube(x.pos,x.xsize,x.ysize,x.zsize,x.bcolor)
             rl.draw_cube_wires(x.pos,x.xsize,x.ysize,x.zsize,x.lcolor)
+
+        for x in models:
+            rl.draw_model(x,rl.Vector3(0,0,0),1,rl.RED)
+            rl.draw_model_wires(x,rl.Vector3(0,0,0),1,rl.BLUE)
 
         rl.draw_grid(1000, 1.0)
 

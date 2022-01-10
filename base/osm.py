@@ -58,13 +58,16 @@ class OSMHandler(osm.SimpleHandler):
         #print(r)
         self.tag_inventory(r, "relation")
 
-def getlocs(dway,dnode,id):
+def get_way_locs(id):
     way = df_ways[df_ways.id == id]
     cords = []
-    for n in way.nodes.item():
-        node = df_nodes[df_nodes.id == n]
-        cord = node.location.item() 
-        cords.append((cord))
+    if(len(way) != 0):
+        for n in way.nodes.item():
+            node = df_nodes[df_nodes.id == n]
+            cord = node.location.item() 
+            cords.append((cord))
+    else:
+        print("ERROR: WAY HAS NO NODES: "+ str(id))
     return cords
 
 def latlontocart(cord):
@@ -109,10 +112,12 @@ df_osm = 0
 df_nodes = 0
 df_ways = 0
 base = "working/"
+
 if((1==1)&(os.path.isfile(base+"tags.pkl") & os.path.isfile(base+"nodes.pkl") & os.path.isfile(base+"ways.pkl"))):
     df_osm = pd.read_pickle(base+"tags.pkl")
     df_nodes = pd.read_pickle(base+"nodes.pkl")
     df_ways = pd.read_pickle(base+"ways.pkl")
+
 else:
     osmhandler = OSMHandler()
     # scan the input file and fills the handler list accordingly
@@ -133,10 +138,10 @@ else:
     df_nodes.to_pickle(base+"nodes.pkl")
     df_ways.to_pickle(base+"ways.pkl")
 
+
+
+
 if __name__ == "__main__":
-
-    
-
     print(df_osm[df_osm.tagkey == "highway"].id)  
 
     #for way in df_osm[df_osm.tagkey == "building"].id:

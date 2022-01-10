@@ -21,7 +21,7 @@ def make_building_obj(b_id):
 
     verts = []
     faces = []
-    for x in osm.getlocs(osm.df_ways,osm.df_nodes,b_id):
+    for x in osm.get_way_locs(b_id):
         p = (osm.localize(osm.latlontocart(x)))
         cord = [p[0],0,p[1]]
         #print(cord)
@@ -57,11 +57,11 @@ def make_building_obj(b_id):
         objFile.write("\n")
     for face in faces:
         objFile.write("f ")
-        objFile.write(str(face[0]+1))
+        objFile.write(str(face[2]+1))
         objFile.write(" ")
         objFile.write(str(face[1]+1))
         objFile.write(" ")
-        objFile.write(str(face[2]+1))
+        objFile.write(str(face[0]+1))
         objFile.write("\n")
     objFile.close() 
 #Get points
@@ -72,9 +72,3 @@ for wayid in osm.df_ways.id:
     isbuilding = (len(b[b.tagkey=="building"]))
     if(isbuilding != 0):
         make_building_obj(wayid)
-    
-
-import rep3D.testbuildingobjs
-
-#print(size)
-#print(verts[13])

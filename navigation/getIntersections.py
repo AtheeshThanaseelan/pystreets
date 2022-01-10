@@ -1,7 +1,6 @@
 import base.osm as osm
 import base.gfx as gfx
-import base.streets as sts
-import m2D.line_drawroads as roadlines
+import base.properties as sts
 
 wayids = sts.roads
 ways = osm.df_ways
