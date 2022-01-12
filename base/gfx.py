@@ -94,7 +94,7 @@ def loop():
         # -----------------------------------------------------------
         rl.begin_drawing()
 
-        rl.clear_background(rl.RAYWHITE)
+        rl.clear_background(rl.SKYBLUE)
 
         rl.begin_mode3d(camera)
 
@@ -107,11 +107,11 @@ def loop():
             rl.draw_cube_wires(x.pos,x.xsize,x.ysize,x.zsize,x.lcolor)
 
         for x in models:
-            rl.draw_model(x,rl.Vector3(0,0,0),1,rl.RED)
+            rl.draw_model(x,rl.Vector3(0,0,0),1,rl.LIGHTGRAY)
             rl.draw_model_wires(x,rl.Vector3(0,0,0),1,rl.BLUE)
 
         rl.draw_grid(1000, 1.0)
-
+        rl.draw_plane(rl.Vector3(0,-0.5,0),rl.Vector2(1000,1000),rl.GREEN)
         rl.end_mode3d()
 
         rl.draw_rectangle(10, 10, 320, 133, rl.fade(rl.SKYBLUE, 0.5))

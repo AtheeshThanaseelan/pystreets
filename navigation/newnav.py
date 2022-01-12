@@ -131,9 +131,9 @@ class gps():
         return road2go
 
 
-test = gps(97247821)
-test.process(thegraph,lengths)
-road2go = test.getnodes(340162270)
+#test = gps(97247821)
+#test.process(thegraph,lengths)
+#road2go = test.getnodes(340162270)
 
 
 def test_nav(road2go):
@@ -151,7 +151,7 @@ def test_nav(road2go):
         gfx.loop()
     gfx.quit_gfx()
 
-test_nav(road2go)
+#test_nav(road2go)
 
 
 
