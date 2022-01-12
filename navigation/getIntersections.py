@@ -2,23 +2,33 @@ import base.osm as osm
 import base.gfx as gfx
 import base.properties as sts
 
- 
+wayids = sts.roads
+ways = osm.df_ways 
 
+#Stores ways that have a node in common
+#Key: Node
+#Value: Each way that has the node
 intersection_ways = {}
+#Stores the intersections that the node connects to
+#Key: Node
+#Value:
 intersection_nodes = {}
 
 
+
+
+#For all roads
 for wayid in wayids:
+    #Nodes of all roads
     nodelist = ways[ways.id == wayid].nodes.item()
+    #For each node in the road
     for node in nodelist:
+        #If the node has been stored previously
         if node in intersection_ways:
-            #Adding to waylist
+            #Add the current way to the list of ways with the common node
             waylist = intersection_ways[node]
             waylist.append(wayid)
             intersection_ways.update({node:waylist})
-
-            #if(wayid == 551682469):
-            #    print(nodelist[max-1])
 
             #Adding to nodelist
             idx = nodelist.index(node)
@@ -43,6 +53,7 @@ for wayid in wayids:
                 intersection_nodes.update({node:[nodelist[max-1]]})
             else:
                 intersection_nodes.update({node:[nodelist[0]]})
+
 
 #print(len(intersection_nodes))
 #print(len(intersection_ways))

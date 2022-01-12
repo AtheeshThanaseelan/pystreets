@@ -44,6 +44,13 @@ def make_building_obj(b_id):
         faces.append(points)
         faces.append(p2)
 
+    #Make top
+    for x in range (0,size-1):
+        idx_max = len(verts)-1
+        verts[idx_max]
+        p = x + size
+        points = [p,p+1,idx_max-x]
+        faces.append(points)
 
     fname = osm.base+"objs/buildings/"+ str(b_id) + ".obj"
     objFile = open(fname, 'w')
@@ -66,9 +73,9 @@ def make_building_obj(b_id):
     objFile.close() 
 #Get points
 
-
-for wayid in osm.df_ways.id:
-    b = osm.df_osm[(osm.df_osm.id == wayid )]
-    isbuilding = (len(b[b.tagkey=="building"]))
-    if(isbuilding != 0):
-        make_building_obj(wayid)
+def make_all():
+    for wayid in osm.df_ways.id:
+        b = osm.df_osm[(osm.df_osm.id == wayid )]
+        isbuilding = (len(b[b.tagkey=="building"]))
+        if(isbuilding != 0):
+            make_building_obj(wayid)

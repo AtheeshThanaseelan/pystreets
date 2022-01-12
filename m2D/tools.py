@@ -10,6 +10,11 @@
 import base.gfx as gfx
 import base.osm as osm
 
+def nodetocube(node,h,cube):
+    pont = osm.getpont(osm.nodetocords(node))
+    print(pont)
+    cube.setpos(pont[0],h,pont[1])
+
 def add_way_line(way):
     p = 0
     prev = 0

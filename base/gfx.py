@@ -23,6 +23,8 @@ class cube():
         self.zsize = 1
         self.bcolor = rl.RED
         self.lcolor = rl.RAYWHITE
+    def setpos(self,x,y,z):
+        self.pos = rl.Vector3(x,y,z)
 
 class line():
     def __init__(self):

@@ -3,7 +3,7 @@ import base.gfx as gfx
 gfx.setup_gfx()
 gfx.load_buildings()
 
-while True:
+while not gfx.rl.window_should_close():
     try:
         gfx.loop()
     except KeyboardInterrupt:
