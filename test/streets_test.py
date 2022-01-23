@@ -1,7 +1,7 @@
 #import sys
 #sys.path.append('../')
 
-import m2D.draw_property as dr
+import systems.m2D.draw_property as dr
 import base.gfx as gfx
 
 gfx.setup_gfx()

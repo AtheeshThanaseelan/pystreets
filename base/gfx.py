@@ -3,6 +3,7 @@ import os
 # set the path before raylib is imported.
 os.environ["RAYLIB_BIN_PATH"] = "working/"
 
+import pickle
 import raylibpy as rl
 from ctypes import byref
 import ctypes
@@ -106,12 +107,17 @@ def loop():
             rl.draw_cube(x.pos,x.xsize,x.ysize,x.zsize,x.bcolor)
             rl.draw_cube_wires(x.pos,x.xsize,x.ysize,x.zsize,x.lcolor)
 
+        loc = []
+
+        with open('working/objs/buildings/663369139.loc', 'rb') as f:
+            loc = pickle.load(f)
+
         for x in models:
-            rl.draw_model(x,rl.Vector3(0,0,0),1,rl.LIGHTGRAY)
-            rl.draw_model_wires(x,rl.Vector3(0,0,0),1,rl.BLUE)
+            rl.draw_model(x,rl.Vector3(0,0,0),1,rl.BLUE)
+            rl.draw_model_wires(x,rl.Vector3(0,0,0),1,rl.BLACK)
 
         rl.draw_grid(1000, 1.0)
-        rl.draw_plane(rl.Vector3(0,-0.5,0),rl.Vector2(1000,1000),rl.GREEN)
+        rl.draw_plane(rl.Vector3(0,-0.5,0),rl.Vector2(1000,1000),rl.WHITE)
         rl.end_mode3d()
 
         rl.draw_rectangle(10, 10, 320, 133, rl.fade(rl.SKYBLUE, 0.5))

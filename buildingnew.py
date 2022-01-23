@@ -8,7 +8,7 @@
 #Get building number and street
 
 
-import base.osm as osm
+import osmloading.osm as osm
 
 def make_building_obj(b_id):
     h = 1
