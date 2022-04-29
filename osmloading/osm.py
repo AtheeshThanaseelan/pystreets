@@ -4,31 +4,16 @@ import math
 import numpy as np
 import os
 
-base = "working/"
+base = "__pycache__/working/"
 scale = 1000
 df_osm = 0
 df_nodes = 0
 df_ways = 0
 
+
 #Utilities
-def cordtoint(cord):
-    i = cord.index('/')
-    lon = float(cord[0:i])
-    lat = float(cord[i+1:len(cord)])
-    return [lat,lon]
 
-def get_way_locs(id):
-    way = df_ways[df_ways.id == id]
-    cords = []
-    if(len(way) != 0):
-        for n in way.nodes.item():
-            node = df_nodes[df_nodes.id == n]
-            cord = node.location.item() 
-            cords.append((cord))
-    else:
-        print("ERROR: WAY HAS NO NODES: "+ str(id))
-    return cords
-
+#Take latlong, returns cartesian
 def latlontocart(cord):
     #x = 6371* 10 * math.cos(cord[0]) * math.cos(cord[1])
     #y = 6371* 10 * math.cos(cord[0]) * math.sin(cord[1])
@@ -41,6 +26,7 @@ def latlontocart(cord):
     #print(x,y,z)
     return [x,y,z]#
 
+#Takes cartesian coordinate
 def localize(cord):
     b = df_nodes
     t = 0
@@ -50,7 +36,7 @@ def localize(cord):
         loc = b.at[t,'location']
 
     norm = latlontocart(loc)
-    
+
     x_o = norm[0]#852.2245421338656 * scale
     y_o = norm[1]#-4525.177344212292 * scale
     z_o = 4402.967673423517 * 1
@@ -59,14 +45,23 @@ def localize(cord):
     zn = 0#cord[2] - z_o
     return [xn,yn,zn]
 
-def getpont(cord):
+#Take nodeID, return localized cartesian coordinate
+def getNodeCartesian(id):
+    node = df_nodes[df_nodes.id == id]
+    cord = node.location.item()
     return localize(latlontocart(cord))
 
-def nodetocords(nodeid):
-    node = df_nodes[df_nodes.id == nodeid]
-    cord = node.location.item() 
-    return cord
-
+#Take wayID, return array of cartesian
+def getWayCartPoints(wayID):
+    way = df_ways[df_ways.id == wayID]
+    cords = []
+    if(len(way) != 0):
+        for n in way.nodes.item():
+            cord = getNodeCartesian(n)
+            cords.append((cord))
+    else:
+        print("ERROR: WAY HAS NO NODES: "+ str(id))
+    return cords
 
 
 #Reading OSM

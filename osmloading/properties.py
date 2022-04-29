@@ -23,6 +23,8 @@ def getroads():
 
         object = osm_df[osm_df.id == x]
         name_df = object[object.tagkey =="name"]
+        # print(object[object.tagkey == "lanes"])
+        # print(object[object.tagkey == "oneway"])
 
         #Check if the road has a name
         if(len(name_df) == 1): 
