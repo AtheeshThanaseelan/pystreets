@@ -6,6 +6,8 @@ import math
 #Each road has a lane structure, holding the real coordinates for each direction
 #Right lane reversed of left lane(original direction)
 
+#ID by OSM road ID
+
 class lane:
     def __init__(self):
         self.mainLane = 0
