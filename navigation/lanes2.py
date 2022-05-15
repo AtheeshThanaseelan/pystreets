@@ -2,6 +2,9 @@ import osmloading.osm as osm
 import osmloading.properties as sts
 import math
 
+#Generate lanes: lane is real coordinates from road way
+#Each road has a lane structure, holding the real coordinates for each direction
+#Right lane reversed of left lane(original direction)
 
 class lane:
     def __init__(self):
@@ -159,13 +162,10 @@ for r_id in wayids:
     currentLane.startNode = way[0]#get start
     currentLane.endNode = way[-1]#get end
     if oneway == False:
-        #Flip the left/right lane order???
         currentLane.leftLane, currentLane.rightLane = make_streetlanes(r_id)
-
         lanes.update({r_id:currentLane})
     else:
         #Ensure one way roads go in the right direction???
-        # print(r_id)
         currentLane.mainLane = osm.getWayCartPoints(r_id)
         lanes.update({r_id:currentLane})
 

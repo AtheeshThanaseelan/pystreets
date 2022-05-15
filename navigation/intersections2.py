@@ -3,15 +3,6 @@ import osmloading.properties as sts
 import navigation.lanes2 as lanes2
 import math
 
-
-#SECOND: Get intersections
-
-#   Loop through all the end nodes
-#       If it exists as start nodes, store it as {startNode, corresponding lane}
-
-#   At the end of the lane, what new lanes are available
-#       Loop through end nodes, find it in start nodes
-
 #Intersection: Collection of start nodes and end nodes
     #Get a intersection from a end node going into the intersection
     #Get a start node as a lane
