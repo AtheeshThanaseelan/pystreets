@@ -12,7 +12,12 @@ df_ways = 0
 
 
 #Utilities
-
+def cordtoint(cord):
+    i = cord.index('/')
+    lon = float(cord[0:i])
+    lat = float(cord[i+1:len(cord)])
+    return [lat,lon]
+    
 #Take latlong, returns cartesian
 def latlontocart(cord):
     #x = 6371* 10 * math.cos(cord[0]) * math.cos(cord[1])

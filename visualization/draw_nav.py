@@ -18,11 +18,15 @@ def draw_lanes():
             end[2] = 5
             # tools.gfx.makeDotColor(end,"blue")
         else:
+            #draw left lane
             tools.draw_line(lanes.lanes[lane].leftLane)
+            #draw start of left lane
             start = lanes.lanes[lane].leftLane[0]
             start.append(10)
             tools.gfx.makeDotColor(start,"red")
+            #draw right lane
             tools.draw_line(lanes.lanes[lane].rightLane)
+            #draw start of right lane
             rstart = lanes.lanes[lane].rightLane[0]
-            rstart.append(10)
+            rstart.append(5)
             tools.gfx.makeDotColor(rstart,"blue")

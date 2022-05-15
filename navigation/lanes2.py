@@ -8,6 +8,10 @@ class lane:
         self.mainLane = 0
         self.leftLane = []
         self.rightLane = []
+        self.startNode = 0
+        self.endNode = 0
+        #One way: only follow names
+        #Otherwise: start is end, end is start
 
 
 def make_streetlanes(way):
@@ -77,9 +81,10 @@ def make_streetlanes(way):
 
         prev_p = x
     
-    #Do the same for the other side
+    #Do the same for the other side, but in reverse?
     prev_p = 0
     for x in verts:
+    # for x in reversed(verts):
         if(prev_p != 0):
 
             #Get direction vector
@@ -133,6 +138,7 @@ def make_streetlanes(way):
 
         prev_p = x
 
+    rightlane.reverse()
     return leftlane, rightlane
 
 lanes = {}
@@ -149,13 +155,17 @@ for r_id in wayids:
         oneway = False
 
     currentLane = lane()
+    way = osm.df_ways[osm.df_ways.id == r_id].nodes.item()
+    currentLane.startNode = way[0]#get start
+    currentLane.endNode = way[-1]#get end
     if oneway == False:
         #Flip the left/right lane order???
         currentLane.leftLane, currentLane.rightLane = make_streetlanes(r_id)
+
         lanes.update({r_id:currentLane})
     else:
         #Ensure one way roads go in the right direction???
-        print(r_id)
+        # print(r_id)
         currentLane.mainLane = osm.getWayCartPoints(r_id)
         lanes.update({r_id:currentLane})
 
